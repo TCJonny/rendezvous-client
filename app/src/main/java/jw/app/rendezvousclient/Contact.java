@@ -13,28 +13,39 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class Contact extends PageObject {
 
-    private boolean updateLocation = false;
+    private boolean getLocation = false;
 
     public Contact(GoogleMap map, LatLng coord) {
         super(map, coord);
     }
 
-    public boolean getUpdateLocationState() { return updateLocation; }
-    public void setUpdateLocationState(boolean update) { updateLocation = update; }
+    public boolean getLocationState() { return getLocation; }
+    public void setUpdateLocationState(boolean update) { getLocation = update; }
 
     /**
-     * If the user has chosen to share their location with the
-     * group, query the groups server to get the location of this
-     * contact.
+     * Queries the groups server for the most recently broadcasted
+     * location of this contact and then uses the updateLocation
+     * method to redraw the corresponding marker on the main
+     * activity map
+     * @return
+     */
+    public LatLng getLocation() {
+        if (getLocationState()) {
+            // network operation
+        }
+        return null;
+    }
+
+    /**
+     * Update the location of the Contact marker on the map
      * @param coords
      * @return
      */
-    public boolean updateLocation(LatLng coords) {
-        if (getUpdateLocationState()) {
-            // query groups server
-            return true;
+    public void updateLocation(LatLng coords) {
+        if (coords != null) {
+            coordinates = coords;
+            // draw item on map
         }
-        return false;
     }
 
     /**

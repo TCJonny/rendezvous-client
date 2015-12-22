@@ -29,14 +29,14 @@ public abstract class PageObject {
     }
 
     /**
-     * Update the location of the object on the map. The
-     * LatLng object may or may not be ignored depending
-     * on whether the location of the object is determined
-     * locally, or with a network operation.
+     * Update the location of the object on the map. Note that
+     * this method does not invoke any network operations, it is
+     * simply responsible for updating the location of the marker
+     * that represents the page object.
      * @param coords
      * @return
      */
-    public abstract boolean updateLocation(LatLng coords);
+    public abstract void updateLocation(LatLng coords);
 
     /**
      * Draw the object

@@ -10,15 +10,24 @@ import java.util.ArrayList;
  * the ability to modify the page contents of the
  * current active page, which is represented by a variable
  * in the user class.
+ *
+ * The page object also contains a Group, which represents
+ * a collection of Contact objects. network operations are
+ * dispatched to the group object, which concurrently
+ * retrieves the locations of all contacts in the group
+ * that are broadcasting location.
  */
 public class Page {
     private ArrayList<PageObject> objects;
+    private Group group;
 
     public Page(PageObject ... objectList) {
         objects = new ArrayList<PageObject>(objectList.length);
         for (PageObject object : objectList) {
             objects.add(object);
         }
+
+        group = new Group(); // network operation should not be done on the main thread
     }
 
     public void render() {
